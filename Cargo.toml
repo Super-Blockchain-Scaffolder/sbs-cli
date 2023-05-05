@@ -6,3 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+clap = { version = "4.1.11", features = ["derive"] }
+reqwest = { version = "0.11.16", features = ["blocking",] }
+serde_yaml = "0.9.21"
+
+[dev-dependencies]
+assert_cmd = "2.0.10"
