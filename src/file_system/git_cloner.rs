@@ -16,6 +16,7 @@ pub fn clone_repo(
 
     Ok(Repository::clone(
         url,
-        &format!("{}{}", location, "foo"),
+        &format!("{}", location),
+        // &format!("{}{}", location, "foo"),
     )?)
 }
