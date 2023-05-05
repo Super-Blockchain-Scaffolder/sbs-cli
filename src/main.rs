@@ -5,6 +5,11 @@ mod data_readers {
 
 mod pure_functions {
     pub(super) mod starter_finder;
+    pub(super) mod repo_name_extracter;
+}
+
+mod file_system {
+    pub(super) mod git_cloner;
 }
 
 use std::error::Error;
@@ -14,6 +19,8 @@ use crate::data_readers::args_reader::read_args;
 use crate::data_readers::master_list_reader::get_master_list_data;
 
 use crate::pure_functions::starter_finder::get_starter_data_from_list_by_name;
+
+use crate::file_system::git_cloner::clone_repo;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let args_passed_in = read_args();
@@ -40,9 +47,15 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("starter data: {:?}", starter_data);
 
-    let repo_url = to_string(starter_data.get("repo-url").unwrap()).unwrap();
+    let repo_url_with_newline = to_string(starter_data.get("repo-url").unwrap()).unwrap();
+    let repo_url = repo_url_with_newline.trim_end_matches("\n");
+
 
     println!("repo_url: {}", repo_url);
+
+    clone_repo(&repo_url, "./")?;
+
+    println!("cloned!");
 
     // if full_args.current_directory {
     //     git_cloner.clone_repo_in_current_dir(starter_data.repo_url);

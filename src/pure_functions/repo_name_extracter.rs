@@ -9,12 +9,14 @@ pub fn get_repo_name_from_url(url: &str) -> String {
 
 #[test]
 fn gets_repo_name() -> Result<(), Box<dyn Error>> {
-    use crate::name_builder::get_repo_name;
+    // use crate::pure_functions::repo_name_extracter::get_repo_name;
+
+    use crate::pure_functions::repo_name_extracter::get_repo_name_from_url;
 
     let example_url = "https://github.com/vivainio/rraf";
     let expected = "rraf";
 
-    assert_eq!(expected, &get_repo_name(example_url));
+    assert_eq!(expected, &get_repo_name_from_url(example_url));
 
     Ok(())
 }
