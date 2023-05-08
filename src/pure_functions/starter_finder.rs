@@ -6,6 +6,7 @@ pub fn get_starter_data_from_list_by_name<'a>(
     starters: &'a Value,
     name_to_find: &'a str,
 ) -> Result<&'a Value, Box<dyn Error>> {
+
     let starters_seq = starters.as_sequence().unwrap();
 
     for s in starters_seq {
@@ -41,6 +42,8 @@ mod finds_starter_from_list {
         let mock_starters: Value = from_str(
             r#"[ { name: first, other_key: 1 }, { name: second, other_key: 2 }, { name: third, other_key: 3 }, { name: fourth, other_key: 4 } ]"#,
         )?;
+
+        // let mock_starters_seq = mock_starters.as_sequence().unwrap();
 
         let result = get_starter_data_from_list_by_name(&mock_starters, name_to_find)?;
 

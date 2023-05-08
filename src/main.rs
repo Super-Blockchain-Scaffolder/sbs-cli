@@ -4,8 +4,8 @@ mod data_readers {
 }
 
 mod pure_functions {
-    pub(super) mod starter_finder;
     pub(super) mod repo_name_extracter;
+    pub(super) mod starter_finder;
     pub(super) mod validate_cli_args;
 }
 
@@ -13,22 +13,28 @@ mod file_system {
     pub(super) mod git_cloner;
 }
 
-// mod inquire_prompts {
-    // pub(super) mod current_dir_confirm;
-    // pub(super) mod folder_name_prompt;
-    // pub(super) mod starter_select_prompt;
-// }
+mod inquire_prompts {
+    pub(super) mod current_dir_confirm;
+    pub(super) mod folder_name_prompt;
+    pub(super) mod starter_select_prompt;
+}
 
-use std::error::Error;
 use serde_yaml::to_string;
+use std::error::Error;
 
 use crate::data_readers::args_reader::read_args;
 use crate::data_readers::master_list_reader::get_master_list_data;
 
-use crate::pure_functions::validate_cli_args::validate_cli_args;
 use crate::pure_functions::starter_finder::get_starter_data_from_list_by_name;
+use crate::pure_functions::validate_cli_args::validate_cli_args;
 
 use crate::file_system::git_cloner::clone_repo;
+
+mod prompt_manager;
+use prompt_manager::{
+    prompt_current_directory_if_needed, prompt_directory_name_if_needed,
+    prompt_starter_name_if_needed,
+};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let args_passed_in = read_args();
@@ -37,31 +43,32 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     validate_cli_args(&args_passed_in)?;
 
-    // let full_args = prompt_for_needed_data(args_passed_in);
-
     let master_list_data = get_master_list_data()?;
 
-    println!("{:?}", master_list_data);
-    
-    let starters_list = master_list_data.get("starter-templates").unwrap();
-    println!("{:?}", starters_list);
+    // println!("{:?}", master_list_data);
 
-    let name_to_find = match args_passed_in.starter_template {
+    let starters_list = master_list_data.get("starter-templates").unwrap();
+    // println!("{:?}", starters_list);
+
+    let full_args_ = prompt_current_directory_if_needed(args_passed_in)?;
+    let full_args__ = prompt_directory_name_if_needed(full_args_)?;
+    let full_args = prompt_starter_name_if_needed(&full_args__, &starters_list)?;
+
+    let name_to_find = match &full_args.starter_template {
         Some(template_name) => template_name,
-        None => panic!("Couldn't find any starter template name!")
+        None => panic!("Couldn't find any starter template name!"),
     };
 
-    let starter_data = get_starter_data_from_list_by_name(starters_list, &name_to_find)?;
+    let starter_data = get_starter_data_from_list_by_name(&starters_list, &name_to_find)?;
 
-    println!("starter data: {:?}", starter_data);
+    // println!("starter data: {:?}", starter_data);
 
     let repo_url_with_newline = to_string(starter_data.get("repo-url").unwrap()).unwrap();
     let repo_url = repo_url_with_newline.trim_end_matches("\n");
 
+    // println!("repo_url: {}", repo_url);
 
-    println!("repo_url: {}", repo_url);
-
-    clone_repo(&repo_url, "./", args_passed_in.current_directory)?;
+    clone_repo(&repo_url, &full_args)?;
 
     println!("cloned!");
 
