@@ -14,7 +14,7 @@ pub fn clone_repo(
     println!("cloning...");
 
     match create_dir {
-        true => Ok(Repository::clone(url, &format!("{}{}", location, "foo"))?),
+        true => Ok(Repository::clone(url, &format!("{}{}", location, repo_name))?),
         false => match Repository::clone(url, &format!("{}", location)) {
             Ok(repo) => {
                 println!("Clone worked!");

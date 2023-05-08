@@ -20,7 +20,7 @@ mod file_system {
 // }
 
 use std::error::Error;
-use serde_yaml::{to_string, Value};
+use serde_yaml::to_string;
 
 use crate::data_readers::args_reader::read_args;
 use crate::data_readers::master_list_reader::get_master_list_data;
