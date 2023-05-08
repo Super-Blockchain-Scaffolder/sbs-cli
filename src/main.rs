@@ -6,11 +6,18 @@ mod data_readers {
 mod pure_functions {
     pub(super) mod starter_finder;
     pub(super) mod repo_name_extracter;
+    pub(super) mod validate_cli_args;
 }
 
 mod file_system {
     pub(super) mod git_cloner;
 }
+
+// mod inquire_prompts {
+    // pub(super) mod current_dir_confirm;
+    // pub(super) mod folder_name_prompt;
+    // pub(super) mod starter_select_prompt;
+// }
 
 use std::error::Error;
 use serde_yaml::{to_string, Value};
@@ -18,6 +25,7 @@ use serde_yaml::{to_string, Value};
 use crate::data_readers::args_reader::read_args;
 use crate::data_readers::master_list_reader::get_master_list_data;
 
+use crate::pure_functions::validate_cli_args::validate_cli_args;
 use crate::pure_functions::starter_finder::get_starter_data_from_list_by_name;
 
 use crate::file_system::git_cloner::clone_repo;
@@ -27,7 +35,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("{:?}", args_passed_in);
 
-    // validate_args(&args_passed_in);
+    validate_cli_args(&args_passed_in)?;
 
     // let full_args = prompt_for_needed_data(args_passed_in);
 
@@ -53,7 +61,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("repo_url: {}", repo_url);
 
-    clone_repo(&repo_url, "./")?;
+    clone_repo(&repo_url, "./", args_passed_in.current_directory)?;
 
     println!("cloned!");
 

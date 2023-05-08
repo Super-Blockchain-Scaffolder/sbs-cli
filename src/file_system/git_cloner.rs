@@ -7,16 +7,23 @@ use crate::pure_functions::repo_name_extracter::get_repo_name_from_url;
 pub fn clone_repo(
     url: &str,
     location: &str,
-    // repo_name: &str,
+    create_dir: bool,
 ) -> Result<Repository, Box<dyn Error>> {
-
     let repo_name = get_repo_name_from_url(url);
 
     println!("cloning...");
 
-    Ok(Repository::clone(
-        url,
-        &format!("{}", location),
-        // &format!("{}{}", location, "foo"),
-    )?)
+    match create_dir {
+        true => Ok(Repository::clone(url, &format!("{}{}", location, "foo"))?),
+        false => match Repository::clone(url, &format!("{}", location)) {
+            Ok(repo) => {
+                println!("Clone worked!");
+                Ok(repo)
+            }
+            Err(e) => { 
+                println!("Clone didn't work {:?}!", e);
+                panic!("Couldn't clone")
+            },
+        },
+    }
 }
