@@ -1,7 +1,8 @@
+use crate::data_readers::args_reader::Cli;
+use crate::inquire_prompts::clone_overwrite_confirm::ask_to_overwrite_in_current_dir;
 use serde_yaml::{to_string, Value};
 use std::error::Error;
-
-use crate::data_readers::args_reader::Cli;
+use std::fs;
 
 use crate::inquire_prompts::current_dir_confirm::ask_to_scaffold_in_current_dir;
 use crate::inquire_prompts::folder_name_prompt::ask_what_to_call_named_dir;
@@ -13,14 +14,38 @@ pub fn prompt_current_directory_if_needed(cli: Cli) -> Result<Cli, Box<dyn Error
     if cli.current_directory {
         // trying to scaffold in current directory
         // just pass along to next step
+        prompt_for_current_dir_files_overwrite_if_needed();
     } else {
         match &new_cli.named_directory {
             Some(_name) => (), // just pass along to next step
-            None => new_cli.current_directory = ask_to_scaffold_in_current_dir()?,
+            None => {
+                let new_current_dir_bool = ask_to_scaffold_in_current_dir()?;
+                new_cli.current_directory = new_current_dir_bool;
+
+                if new_current_dir_bool {
+                    prompt_for_current_dir_files_overwrite_if_needed();
+                }
+            }
         }
     }
 
     Ok(new_cli)
+}
+
+pub fn prompt_for_current_dir_files_overwrite_if_needed() {
+    let current_dir = ".";
+    let has_files = fs::read_dir(current_dir).unwrap().next().is_some();
+
+    if has_files {
+        println!("There are files in the current directory");
+        match ask_to_overwrite_in_current_dir() {
+            Ok(true) => panic!("Sorry, not yet supported... 😅"),
+            Ok(false) => panic!("Cloning in the current directory without overwriting files is currently unsupported. [insert link to open github issue here]"),
+            Err(_err) => panic!("Error confirming file overwrite for current directory scaffold")
+        };
+    } else {
+        println!("There are no files in the current directory");
+    }
 }
 
 pub fn prompt_directory_name_if_needed(cli: Cli) -> Result<Cli, Box<dyn Error>> {
