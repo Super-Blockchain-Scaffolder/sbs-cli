@@ -17,7 +17,7 @@ Here are just a few of the methods we have planned...
 
 | Required Dependencies | Supported Operating System(s)                  |
 | --------------------- | ---------------------------------------------- |
-| Homebrew              | Mac, Windows, Linux (Any OS that supports brew) |
+| NPM                   | Mac, Windows, Linux (Any OS that supports npm) |
 
 Install command:
 ```
@@ -30,7 +30,7 @@ npm i -g bss-cli
 
 | Required Dependencies | Supported Operating System(s)                  |
 | --------------------- | ---------------------------------------------- |
-| NPM                   | Mac, Windows, Linux (Any OS that supports npm) |
+| Homebrew              | Mac, Windows, Linux (Any OS that supports brew) |
 
 Install command:
 ```
@@ -73,5 +73,8 @@ cargo run
 
 Some examples of running locally with flag arguments:
 ```bash
-
+cargo run -- -a
+cargo run -- -c
+cargo run -- -n foo
+cargo run -- -n foo -s "Foundry Starter Kit"
 ```

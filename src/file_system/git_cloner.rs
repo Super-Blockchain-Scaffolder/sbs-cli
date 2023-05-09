@@ -3,18 +3,18 @@ use std::error::Error;
 use git2::{Repository, RepositoryInitMode, RepositoryInitOptions};
 
 use crate::{
-    data_readers::args_reader::Cli, pure_functions::repo_name_extracter::get_repo_name_from_url,
+    data_readers::args_reader::Cli
 };
 
 pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
-    let repo_name = get_repo_name_from_url(url);
+    // let repo_name = get_repo_name_from_url(url);
 
     println!("cloning...");
 
     // let mut clone_opts = CloneOptions::new();
     // clone_opts.flags(GitCloneFlags::FORCE);
 
-    let mut initOptions: RepositoryInitOptions = RepositoryInitOptions::new();
+    // let mut init_options: RepositoryInitOptions = RepositoryInitOptions::new();
     // .mode(RepositoryInitMode::all());
 
     // initOptions.mode(RepositoryInitMode::all());
