@@ -1,7 +1,6 @@
 use serde_yaml::Value;
 use std::error::Error;
 
-// use crate::shared_constants::URL;
 use reqwest::blocking::get;
 
 pub const MASTER_LIST_URL: &str = "https://raw.githubusercontent.com/Blockchain-Super-Scaffolder/bss-master-list/main/bss-master-list.yaml";

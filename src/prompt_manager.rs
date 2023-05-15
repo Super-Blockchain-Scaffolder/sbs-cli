@@ -39,7 +39,8 @@ pub fn prompt_for_current_dir_files_overwrite_if_needed() {
     if has_files {
         println!("There are files in the current directory");
         match ask_to_overwrite_in_current_dir() {
-            Ok(true) => panic!("Sorry, not yet supported... 😅"),
+            // Ok(true) => panic!("Sorry, not yet supported... 😅"),  // better for ux for unsupported current dir scaffold
+            Ok(true) => (), // For debugging scaffolding into current directory
             Ok(false) => panic!("Cloning in the current directory without overwriting files is currently unsupported. [insert link to open github issue here]"),
             Err(_err) => panic!("Error confirming file overwrite for current directory scaffold")
         };
@@ -60,11 +61,11 @@ pub fn prompt_directory_name_if_needed(cli: Cli) -> Result<Cli, Box<dyn Error>> 
 
 pub fn prompt_starter_name_if_needed(
     cli: &Cli,
-    starters_list: &Value,
+    starters_data: &Value,
 ) -> Result<Cli, Box<dyn Error>> {
     let mut new_cli: Cli = cli.clone();
 
-    let starters_seq = starters_list.as_sequence().unwrap();
+    let starters_seq = starters_data.get("starter-templates").unwrap().as_sequence().unwrap();
 
     let starter_names = starters_seq
         .iter()

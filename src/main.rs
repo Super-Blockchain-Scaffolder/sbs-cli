@@ -15,6 +15,7 @@ mod pure_functions {
 
 mod file_system {
     pub(super) mod git_cloner;
+    pub(super) mod dir_deleter;
 }
 
 mod inquire_prompts {
@@ -57,25 +58,25 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let master_list_data = get_master_list_data()?;
 
-    let starters_list = master_list_data.get("starter-templates").unwrap();
+    // let starters_list = master_list_data.get("starter-templates").unwrap();
 
     let args_unknown_dir_or_name = prompt_current_directory_if_needed(args_passed_in)?;
     let args_unknown_name = prompt_directory_name_if_needed(args_unknown_dir_or_name)?;
-    let full_args = prompt_starter_name_if_needed(&args_unknown_name, &starters_list)?;
+    let full_args = prompt_starter_name_if_needed(&args_unknown_name, &master_list_data)?;
 
     let name_to_find = match &full_args.starter_template {
         Some(template_name) => template_name,
         None => panic!("Couldn't find any starter template name!"),
     };
 
-    let starter_data = get_starter_data_from_list_by_name(&starters_list, &name_to_find)?;
+    let starter_data = get_starter_data_from_list_by_name(&master_list_data, &name_to_find)?;
 
     let repo_url_with_newline = to_string(starter_data.get("repo-url").unwrap()).unwrap();
     let repo_url = repo_url_with_newline.trim_end_matches("\n");
 
     clone_repo(&repo_url, &full_args)?;
 
-    println!("Successfully scaffolded!");
+    println!("\nSuccessfully scaffolded!\n");
 
     Ok(())
 }
