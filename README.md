@@ -5,46 +5,39 @@ Source code for the awesome open-source scaffolding tool, _The BlockChain Super 
 
 ## Installation
 
-(currently not deployed)
+The bss-cli can be installed with either cargo or npm.
 
-We are working on many ways of deploying this cli tool.
-
-Here are just a few of the methods we have planned...
-
-<br/>
-
-### Install Method 1) Global NPM Package
-
-| Required Dependencies | Supported Operating System(s)                  |
-| --------------------- | ---------------------------------------------- |
-| NPM                   | Mac, Windows, Linux (Any OS that supports npm) |
-
-Install command:
+```sh
+cargo install bss-cli
 ```
+
+_or_
+
+```sh
 npm i -g bss-cli
 ```
 
 <br/>
 
-### Install Method 2) Brew Formula
+## Usage
 
-| Required Dependencies | Supported Operating System(s)                  |
-| --------------------- | ---------------------------------------------- |
-| Homebrew              | Mac, Windows, Linux (Any OS that supports brew) |
-
-Install command:
+Run in interactive mode (prompts user for necessary information)
 ```
-brew tap bss
-brew install bss-cli
+bss
 ```
 
+Various flags can be passed to skip over the interactive prompts.
+
+See all optional flags:
+```sh
+bss --help
+```
+
+Example usage with flag arguments:
+```sh
+bss -n "my-new_directory" -s "Chainlink Foundry Starter"
+```
 <br/>
-
-### Other Install Methods??
-Please, people out there in the community, let us know what other installations methods you would like to see here! 🙏
-
-<br/>
-
 ---
 
 ## Dev Workflow
