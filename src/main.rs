@@ -8,7 +8,6 @@ mod data_readers {
 }
 
 mod pure_functions {
-    pub(super) mod repo_name_extracter;
     pub(super) mod starter_finder;
     pub(super) mod validate_cli_args;
 }

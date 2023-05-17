@@ -1,6 +1,6 @@
 use std::error::Error;
 
-use inquire::{Confirm, InquireError};
+use inquire::Confirm;
 
 pub fn ask_to_overwrite_in_current_dir() -> Result<bool, Box<dyn Error>> {
     print!("\n");
