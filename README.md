@@ -71,3 +71,14 @@ cargo run -- -c
 cargo run -- -n foo
 cargo run -- -n foo -s "Foundry Starter Kit"
 ```
+
+<br/>
+
+## Deploying
+
+Deploys are currently done through the BSS Team account using the `rust-to-npm` package.
+
+Note that we want "bss" to be the command users run but we want users to install it with "bss-cli" so we deploy with the -n flag like so:
+```sh
+rust-to-npm deploy -b -n bss-cli
+```
