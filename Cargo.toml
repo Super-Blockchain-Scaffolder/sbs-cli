@@ -2,13 +2,13 @@
 name = "bss"
 version = "0.1.0"
 edition = "2021"
-description = "The Blockchain Super Scaffolder command line tool"
-repository = "https://github.com/Blockchain-Super-Scaffolder/bss-cli-tool"
+description = "The Super Scaffolder Blockchain command line tool!"
+repository = "https://github.com/Super-Blockchain-Scaffolder/bss-cli-tool"
 readme = "README.md"
 keywords = ["blockchain", "crypto", "npm", "rust", "cli-tool", "scaffold", "sdcaffolder", "scaffolding", "template"]
 categories = ["command-line-utilities"]
 license = "MIT"
-homepage = "https://github.com/Blockchain-Super-Scaffolder/bss-cli-tool"
+homepage = "https://github.com/Super-Blockchain-Scaffolder/bss-cli-tool"
 authors = ["BSS Team - jim.lynch@evaluates2.com"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

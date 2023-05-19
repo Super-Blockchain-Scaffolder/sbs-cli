@@ -51,7 +51,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         print_bss_ascii_art()
     };
 
-    println!("\nLet's scaffold a new blockchain project!");
+    println!("Let's scaffold a new blockchain project!");
 
     validate_cli_args(&args_passed_in)?;
 

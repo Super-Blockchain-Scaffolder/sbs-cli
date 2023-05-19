@@ -1,5 +1,5 @@
 # bss-cli-tool
-Source code for the awesome open-source scaffolding tool, _The BlockChain Super Scaffolder!_
+Source code for the awesome open-source scaffolding tool, _The Super Blockchain Scaffolder!_
 
 <br/>
 
