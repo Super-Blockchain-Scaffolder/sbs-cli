@@ -1,6 +1,6 @@
 {
   "name": "sbs-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The Super Scaffolder Blockchain command line tool!",
   "main": "start.js",
   "directories": {
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "https://github.com/Super-Blockchain-Scaffolder/sbs-cli.git"
   },
-  "keywords": ["blockchain","crypto","npm","rust","cli-tool","scaffold","sdcaffolder","scaffolding","template"],
+  "keywords": ["blockchain","crypto","npm","cli-tool","scaffold"],
   "author": "SBS Team - jim.lynch@evaluates2.com",
   "license": "MIT",
   "bugs": {

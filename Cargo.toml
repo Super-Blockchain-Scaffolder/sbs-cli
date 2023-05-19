@@ -1,11 +1,11 @@
 [package]
 name = "sbs"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 description = "The Super Scaffolder Blockchain command line tool!"
 repository = "https://github.com/Super-Blockchain-Scaffolder/sbs-cli"
 readme = "README.md"
-keywords = ["blockchain", "crypto", "npm", "rust", "cli-tool", "scaffold", "sdcaffolder", "scaffolding", "template"]
+keywords = ["blockchain", "crypto", "npm", "cli-tool", "scaffold"]
 categories = ["command-line-utilities", "crypto", "blockchain", "rust"]
 license = "MIT"
 homepage = "https://sbs-cli.org"
