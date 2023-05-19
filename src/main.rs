@@ -27,7 +27,7 @@ mod inquire_prompts {
 use serde_yaml::to_string;
 use std::error::Error;
 
-use crate::console_output::ascii_art::print_bss_ascii_art;
+use crate::console_output::ascii_art::print_sbs_ascii_art;
 
 use crate::data_readers::args_reader::read_args;
 use crate::data_readers::master_list_reader::get_master_list_data;
@@ -48,10 +48,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     let args_passed_in = read_args();
     
     if !args_passed_in.art_skipped {
-        print_bss_ascii_art()
+        print_sbs_ascii_art()
     };
 
-    println!("Let's scaffold a new blockchain project!");
+    println!("\nLet's scaffold a new blockchain project!");
 
     validate_cli_args(&args_passed_in)?;
 
