@@ -1,7 +1,7 @@
 {
   "name": "sbs-cli",
-  "version": "0.0.2",
-  "description": "The Super Scaffolder Blockchain command line tool!",
+  "version": "0.0.3",
+  "description": "The Super Blockchain Scaffolder, a command line utility for scaffolding blockchain-related projects!",
   "main": "start.js",
   "directories": {
     "test": "tests"
