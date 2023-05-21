@@ -25,6 +25,7 @@ mod validate_cli_args_tests {
             named_directory: None,
             starter_template: None,
             art_skipped: false,
+            version: false
         })?;
 
         // current_dir true, no named dir
@@ -33,6 +34,7 @@ mod validate_cli_args_tests {
             named_directory: None,
             starter_template: None,
             art_skipped: false,
+            version: false
         })?;
 
         // current_dir false, named dir
@@ -41,6 +43,7 @@ mod validate_cli_args_tests {
             named_directory: Some("foo".to_string()),
             starter_template: None,
             art_skipped: false,
+            version: false
         })?;
 
         Ok(())
@@ -55,6 +58,7 @@ mod validate_cli_args_tests {
                 named_directory: Some("foo".to_string()),
                 starter_template: None,
                 art_skipped: false,
+                version: false
             })
         });
 

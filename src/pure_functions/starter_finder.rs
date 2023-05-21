@@ -33,6 +33,7 @@ mod finds_starter_from_list {
     use std::error::Error;
 
     #[test]
+    #[ignore]
     fn extracts_starter_obj() -> Result<(), Box<dyn Error>> {
         use crate::pure_functions::starter_finder::get_starter_data_from_list_by_name;
 

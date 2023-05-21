@@ -13,8 +13,8 @@ mod pure_functions {
 }
 
 mod file_system {
-    pub(super) mod git_cloner;
     pub(super) mod dir_deleter;
+    pub(super) mod git_cloner;
 }
 
 mod inquire_prompts {
@@ -44,9 +44,13 @@ use prompt_manager::{
 };
 
 fn main() -> Result<(), Box<dyn Error>> {
-    
     let args_passed_in = read_args();
-    
+
+    if args_passed_in.version {
+        println!("{}", option_env!("CARGO_PKG_VERSION").unwrap());
+        return Ok(());
+    }
+
     if !args_passed_in.art_skipped {
         print_sbs_ascii_art()
     };

@@ -1,8 +1,8 @@
 [package]
 name = "sbs"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
-description = "The Super Scaffolder Blockchain command line tool!"
+description = "The Super Blockchain Scaffolder, a command line utility for scaffolding blockchain-related projects!"
 repository = "https://github.com/Super-Blockchain-Scaffolder/sbs-cli"
 readme = "README.md"
 keywords = ["blockchain", "crypto", "npm", "cli-tool", "scaffold"]
