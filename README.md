@@ -10,7 +10,7 @@ The sbs-cli is a free and open-source command line tool meant to make it easy fo
 <br/>
 
 ## History
-The sbs-cli was created by Jim ([@JimLynchCodes](https://github.com/orgs/Super-Blockchain-Scaffolder/people/JimLynchCodes)) and Pranav ([@ps428](https://github.com/ps428)) for the Spring 2023 Chainlink hackathon. 
+The sbs-cli was created by Jim ([@JimLynchCodes](https://github.com/JimLynchCodes)) and Pranav ([@ps428](https://github.com/ps428)) for the Spring 2023 Chainlink hackathon. 
 
 <br/>
 
