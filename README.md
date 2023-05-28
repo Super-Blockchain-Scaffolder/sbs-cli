@@ -2,6 +2,8 @@
 
 The Super Blockchain Scaffolder command line utility!
 
+Learn more at https://sbs-cli.org
+
 <br/>
 
 ## Purpose
