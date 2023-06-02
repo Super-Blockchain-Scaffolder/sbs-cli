@@ -13,11 +13,13 @@ pub fn get_starter_data_from_list_by_name<'a>(
         .unwrap();
 
     for s in starters_seq {
-
         let starter_iterator_name: &str = &to_string(s.get("name").unwrap()).unwrap();
 
         if name_to_find == starter_iterator_name.trim_end_matches("\n") {
-            println!("\nScaffolding repo from: {:#?}", s.get("repo-url").unwrap());
+            println!(
+                "\nScaffolding repo from: {}",
+                to_string(s.get("repo-url").unwrap()).unwrap().trim_end_matches("\n")
+            );
             return Ok(s);
         }
     }
