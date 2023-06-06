@@ -41,6 +41,20 @@ pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
                 stats.indexed_objects(),
                 stats.received_bytes()
             );
+            // print a line based progress bar
+            let progress = (stats.received_objects() as f32 / stats.total_objects() as f32) * 100.0;
+            print!("[");
+            for i in 0..50 {
+                if i as f32 <= progress / 2.0 {
+                    print!("=");
+                } else if i as f32 <= progress {
+                    print!(">");
+                } else {
+                    print!(" ");
+                }
+            }
+            println!("] {:.2}%", progress);
+            
         }
         std::io::stdout().flush().unwrap();
         true
