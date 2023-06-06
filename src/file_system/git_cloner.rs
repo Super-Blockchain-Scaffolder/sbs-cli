@@ -4,6 +4,7 @@ use std::error::Error;
 use std::fs;
 use std::io::Write;
 use tempfile;
+use std::io::stdout;
 
 use super::dir_deleter::delete_git_folder;
 use crate::data_readers::args_reader::Cli;
@@ -34,14 +35,6 @@ pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
                 stats.total_deltas()
             );
         } else if stats.total_objects() > 0 {
-            print!(
-                "Received {}/{} objects ({}) in {} bytes\r",
-                stats.received_objects(),
-                stats.total_objects(),
-                stats.indexed_objects(),
-                stats.received_bytes()
-            );
-            // print a line based progress bar
             let progress = (stats.received_objects() as f32 / stats.total_objects() as f32) * 100.0;
             print!("[");
             for i in 0..50 {
@@ -53,10 +46,9 @@ pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
                     print!(" ");
                 }
             }
-            println!("] {:.2}%", progress);
-            
+            print!("] {:.2}%\r", progress);
         }
-        std::io::stdout().flush().unwrap();
+        stdout().flush().unwrap();
         true
     });
 
