@@ -2,9 +2,9 @@ use git2::{FetchOptions, RemoteCallbacks};
 use std::env;
 use std::error::Error;
 use std::fs;
+use std::io::stdout;
 use std::io::Write;
 use tempfile;
-use std::io::stdout;
 
 use super::dir_deleter::delete_git_folder;
 use crate::data_readers::args_reader::Cli;
@@ -27,16 +27,14 @@ pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
 
     // Create a RemoteCallbacks struct with a progress callback
     let mut callbacks = RemoteCallbacks::new();
+    let mut progress_complete = false;
+
     callbacks.transfer_progress(|stats| {
         if stats.received_objects() == stats.total_objects() {
-            print!(
-                "Resolving deltas {}/{}\r",
-                stats.indexed_deltas(),
-                stats.total_deltas()
-            );
+            print!("Resolving deltas {}/{}\r", stats.indexed_deltas(), stats.total_deltas());
         } else if stats.total_objects() > 0 {
             let progress = (stats.received_objects() as f32 / stats.total_objects() as f32) * 100.0;
-            print!("[");
+            print!("\r[");
             for i in 0..50 {
                 if i as f32 <= progress / 2.0 {
                     print!("=");
@@ -49,6 +47,19 @@ pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
             print!("] {:.2}%\r", progress);
         }
         stdout().flush().unwrap();
+    
+        // Check if the received objects are equal to the total objects and print 100% progress
+        if stats.received_objects() == stats.total_objects() && !progress_complete{
+            print!("\r[");
+            for _ in 0..50 {
+                print!("=");
+            }
+            print!("] 100.00%\n");
+            stdout().flush().unwrap();
+            progress_complete = true;
+
+        }
+    
         true
     });
 
