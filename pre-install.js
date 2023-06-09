@@ -29,8 +29,8 @@ if (fs.existsSync(cargoDir)) {
     
 const features = process.env.npm_config_features ? `--features ${process.env.npm_config_features.replace(",", " ")}` : ""; 
 
-console.log(`Installing and compiling sbs 0.0.3 ${features} ...`);
-exec(`cargo install sbs --vers 0.0.3 ${features}`, (error, stdout, stderr) => {
+console.log(`Installing and compiling sbs 1.0.0 ${features} ...`);
+exec(`cargo install sbs --vers 1.0.0 ${features}`, (error, stdout, stderr) => {
   console.log(stdout);
   if (error || stderr) {
     console.log(error || stderr);
