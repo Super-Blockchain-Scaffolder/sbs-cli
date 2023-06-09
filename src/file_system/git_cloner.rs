@@ -12,17 +12,18 @@ use crate::data_readers::args_reader::Cli;
 pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
     let current_dir = env::current_dir()?;
     let mut location_to_clone_into: String = if cli.current_directory {
-        println!("\nScaffolding to: {}", &current_dir.display());
+        println!("\nScaffolding to: {}\n", &current_dir.display());
         ".".to_string()
     } else {
         match &cli.named_directory {
             Some(name) => {
-                println!("\nScaffolding to: {}/{}", &current_dir.display(), name);
+                println!("\nScaffolding to: {}/{}\n", &current_dir.display(), name);
                 format!("./{}/", name)
             }
             None => panic!("Cloning into named directory but no name was provided!"),
         }
     };
+    
     let mut location_to_clone_into_path = std::path::Path::new(&location_to_clone_into);
 
     // Create a RemoteCallbacks struct with a progress callback
@@ -31,7 +32,7 @@ pub fn clone_repo(url: &str, cli: &Cli) -> Result<(), Box<dyn Error>> {
 
     callbacks.transfer_progress(|stats| {
         if stats.received_objects() == stats.total_objects() {
-            print!("Resolving deltas {}/{}\r", stats.indexed_deltas(), stats.total_deltas());
+            // print!("Resolving deltas {}/{}\r", stats.indexed_deltas(), stats.total_deltas());
         } else if stats.total_objects() > 0 {
             let progress = (stats.received_objects() as f32 / stats.total_objects() as f32) * 100.0;
             print!("\r[");
